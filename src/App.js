@@ -41,12 +41,13 @@ const App = () => {
     `
       )
       .then((res) => {
-        setTemp(Math.round(res.data.main.temp-273));
-        console.log(res);
+        setTemp(Math.round(res.data.main.temp - 273));
       })
       .catch((err) => {
         console.log(err);
       });
+
+    return () => {};
   }, [city]);
 
   return (
@@ -66,11 +67,11 @@ const App = () => {
         <div className='upper-element'>
           <p className='greeting'>
             Good{' '}
-            {date.getHours() > 12 && date.getHours() < 17
+            {date.getHours() < 24 && date.getHours() >= 17
+              ? 'Evening'
+              : date.getHours() >= 12 && date.getHours() <= 17
               ? 'Afternoon'
-              : date.getHours() > 0 && date.getHours() < 12
-              ? 'Morning'
-              : 'Evening'}
+              : 'Morning'}
           </p>
           <input
             type='text'
